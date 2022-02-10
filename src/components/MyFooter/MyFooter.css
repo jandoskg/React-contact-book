@@ -1,0 +1,16 @@
+.footer {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(24, 3, 22);
+  border-radius: 5px;
+}
+
+.footer-list {
+  color: darkgoldenrod;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-decoration: none;
+  line-height: 30px;
+  list-style-type: none;
+}
