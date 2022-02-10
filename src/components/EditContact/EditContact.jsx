@@ -1,65 +1,76 @@
 import React, { useState } from "react";
-import { Button, Header, Image, Input, Modal } from "semantic-ui-react";
+import { Button, Input, Modal } from "semantic-ui-react";
 
-const EditContact = ({ editContact }) => {
-  const [open, setOpen] = React.useState(true);
-  let [item, setItem] = useState(editContact);
+const EditContact = ({ editContacts, handleSave, closeModal }) => {
+  const [open, setOpen] = React.useState(false);
+  const [contact, setContact] = useState(editContacts);
 
-  function handleEditInput(e) {
-    let newObj = { ...item };
-    newObj.task = e.target.value;
-    setItem(newObj);
-  }
+  const editFullName = (e) => {
+    let newObj = {
+      ...contact,
+      fullName: e.target.value,
+    };
+    setContact(newObj);
+  };
+  const editNumber = (e) => {
+    let newObj = {
+      ...contact,
+      number: e.target.value,
+    };
+    setContact(newObj);
+  };
+  const editEmail = (e) => {
+    let newObj = {
+      ...contact,
+      email: e.target.value,
+    };
+    setContact(newObj);
+  };
 
   return (
-    <div>
+    <>
       <Modal
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
-        open={open}
-        // trigger={
-        //   <Button inverted color="brown">
-        //     Add New Contact
-        //   </Button>
-        // }
+        open={true}
       >
-        <Modal.Header>Add New Contact</Modal.Header>
+        <Modal.Header>Save Contact</Modal.Header>
         <Modal.Content>
-          <div>
+          <div className="form">
             <Input
-              value={""}
-              //   onChange={(e) => setFullName(e.target.value)}
+              value={contact.fullName}
+              onChange={editFullName}
               size="big"
               placeholder="Enter full name"
             />
             <Input
-              value={""}
-              //   onChange={(e) => setNumber(e.target.value)}
+              value={contact.number}
+              onChange={editNumber}
               size="big"
               placeholder="Enter phone number"
             />
             <Input
-              value={""}
-              //   onChange={(e) => setEmail(e.target.value)}
+              value={contact.email}
+              onChange={editEmail}
               size="big"
               placeholder="Enter your email"
             />
           </div>
         </Modal.Content>
         <Modal.Actions>
-          <Button color="black" onClick={() => setOpen(false)}>
+          <Button color="black" onClick={() => closeModal(false)}>
             Close
           </Button>
           <Button
-            content="Add Contact"
+            content="Save Contact"
             labelPosition="right"
             icon="checkmark"
-            // onClick={handleAdd}
+            onClick={() => handleSave(contact)}
             positive
           />
         </Modal.Actions>
       </Modal>
-    </div>
+    </>
   );
 };
 

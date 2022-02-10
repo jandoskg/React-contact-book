@@ -2,10 +2,10 @@ import React from "react";
 import { Button } from "semantic-ui-react";
 import { Table } from "semantic-ui-react";
 
-const ContactCard = ({ item, index, handleDelete, handleEdit }) => {
+const ContactCard = ({ item, handleDelete, handleEdit }) => {
   const extra = (
     <div>
-      <Button inverted color="olive" onClick={() => handleEdit(index)}>
+      <Button inverted color="olive" onClick={() => handleEdit(item.id)}>
         Edit
       </Button>
       <Button color="red" onClick={() => handleDelete(item.id)}>

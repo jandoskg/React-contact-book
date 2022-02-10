@@ -15,13 +15,13 @@ const ContactList = ({ contacts, handleDelete, handleEdit }) => {
             <Table.HeaderCell>Edit/Delete</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-        {contacts.map((item, index) => (
+        {contacts.map((item) => (
           <ContactCard
-            index={index}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
             key={item.id}
             item={item}
+            handleEdit={handleEdit}
           />
         ))}
       </Table>

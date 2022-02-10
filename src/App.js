@@ -3,13 +3,14 @@ import "./App.css";
 
 import ContactList from "./components/ContactList/ContactList";
 import EditContact from "./components/EditContact/EditContact";
+import MyFooter from "./components/MyFooter/MyFooter";
 
 import MyNavbar from "./components/MyNavbar/MyNavbar";
 
 function App() {
   const [contacts, setContacts] = useState([]);
-  let [modal, setModal] = useState(false);
-  let [editContact, setEditContact] = useState({});
+  const [modal, setModal] = useState(false);
+  const [editContacts, setEditContacts] = useState({});
 
   const handleContacts = (newObj) => {
     let newContacts = [...contacts];
@@ -24,11 +25,30 @@ function App() {
     });
     setContacts(newContacts);
   }
-
-  function handleEdit(index) {
+  const closeModal = () => {
+    setModal(false);
+  };
+  const handleEdit = (id) => {
+    let obj = contacts.reduce((prev, current) => {
+      if (current.id === id) {
+        return current;
+      }
+      return prev;
+    });
     setModal(true);
-    setEditContact(contacts[index]);
-  }
+    setEditContacts(obj);
+  };
+
+  const handleSave = (obj) => {
+    let newContacts = contacts.map((item) => {
+      if (item.id === obj.id) {
+        return obj;
+      }
+      return item;
+    });
+    setContacts(newContacts);
+    closeModal();
+  };
 
   return (
     <>
@@ -39,8 +59,15 @@ function App() {
         handleDelete={handleDelete}
         handleEdit={handleEdit}
       />
+      {modal && (
+        <EditContact
+          handleSave={handleSave}
+          editContacts={editContacts}
+          closeModal={closeModal}
+        />
+      )}
 
-      {modal ? <EditContact editContact={editContact} /> : null}
+      <MyFooter />
     </>
   );
 }
