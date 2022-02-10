@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Header, Image, Input, Modal } from "semantic-ui-react";
+import { Button, Header, Image, Input, Modal, Icon } from "semantic-ui-react";
 import "./AddContact.css";
 
 const AddContact = ({ handleContacts }) => {
@@ -32,6 +32,7 @@ const AddContact = ({ handleContacts }) => {
         open={open}
         trigger={
           <Button inverted color="brown">
+          <Icon loading name='asterisk' />
             Add New Contact
           </Button>
         }
